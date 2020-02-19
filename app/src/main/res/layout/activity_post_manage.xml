@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostManageActivity"
+    android:orientation="vertical"
+    android:background="#E1EEFA">
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar_manageposts"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/post_color"
+        android:text="Touch post to delete."
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:fontFamily="sans-serif-thin"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lv_managePostsActivity"
+            android:layout_margin="25dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="15sp"
+            android:elevation="2dp"
+            android:layout_weight="1"
+            />
+        <Button
+            android:layout_width="265dp"
+            android:layout_height="45dp"
+            android:text="done"
+            android:textColor="#fff"
+            android:background="@color/buttonColor"
+            android:layout_marginTop="35dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:textSize="15sp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="sans-serif-thin"
+            android:textStyle="bold"
+            android:id="@+id/btnDone_PostManageActivity"
+            android:elevation="3dp"/>
+
+
+</LinearLayout>

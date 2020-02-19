@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backgroundColor"
+    android:elevation="3dp"
+    android:layout_gravity="center">
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/mail"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/etColor"
+        android:layout_gravity="center"
+        android:elevation="3dp"
+        android:layout_margin="15dp">
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/pencil"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <EditText
+            android:layout_height="45dp"
+            android:layout_width="215dp"
+            android:background="@color/etColor"
+            android:hint="new email"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:id="@+id/etNewEmail_ChangeEmailDialog"
+            android:elevation="2dp"
+            android:inputType="textEmailAddress"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/etColor"
+        android:layout_gravity="center"
+        android:elevation="3dp"
+        android:layout_margin="15dp">
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/pencil"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <EditText
+            android:layout_height="45dp"
+            android:layout_width="170dp"
+            android:background="@color/etColor"
+            android:hint="your password"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:id="@+id/etPassConfirm_ChangeEmailDialog"
+            android:elevation="2dp"
+            android:inputType="textPassword"/>
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/etColor"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/eye"
+                android:id="@+id/ivEye_changeEmailDialog"
+                android:longClickable="true"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="260dp"
+        android:layout_height="45dp"
+        android:text="confirm"
+        android:textColor="#fff"
+        android:background="@color/buttonColor"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-thin"
+        android:textStyle="bold"
+        android:id="@+id/btnSubmit_ChangeEmailDialog"
+
+        android:elevation="3dp"/>
+
+
+
+</LinearLayout>

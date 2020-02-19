@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RentParkingActivity"
+    android:orientation="vertical"
+    android:background="@color/backgroundColor">
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar_rentparking"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textSize="35sp"
+        android:text="Rent your parking"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/options_bg"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ll_Location_RentActivity">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            >
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/address"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="50dp"
+            android:id="@+id/tvLocation_RentActivity"
+            android:hint="Set your parking location"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="19sp"
+
+            />
+    </LinearLayout>
+
+
+    <!--<LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/options_bg"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ll_Camera_RentActivity">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            >
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/camera"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="225dp"
+            android:layout_height="50dp"
+            android:id="@+id/tvCamera_RentActivity"
+            android:text="Your parking picture"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="19sp"
+
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/iv_ParkingPic_RentActivity"/>
+
+        </RelativeLayout>
+
+    </LinearLayout> -->
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/options_bg"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            >
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/phone"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <EditText
+            android:layout_width="270dp"
+            android:layout_height="50dp"
+            android:id="@+id/et_Phone_RentActivity"
+            android:textColor="@color/white"
+            android:hint="Your phone number"
+            android:textColorHint="@color/white"
+            android:phoneNumber="true"
+            android:maxLength="10"
+            android:textSize="19sp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/options_bg"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            >
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/money"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <EditText
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:id="@+id/et_Cash_RentActivity"
+            android:textColor="@color/white"
+            android:hint="Money cost per hour"
+            android:textColorHint="@color/white"
+            android:inputType="number"
+
+            android:textSize="19sp"
+            />
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            >
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/shekel"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/options_bg"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ll_Fromdate_RentActivity"
+        >
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            >
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/time"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="50dp"
+            android:id="@+id/tv_From_Time_RentActivity"
+            android:textColor="@color/white"
+            android:hint="From time"
+            android:textColorHint="@color/white"
+            android:layout_gravity="center"
+            android:gravity="left|center"
+
+            android:textSize="19sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/options_bg"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ll_Totime_RentActivity">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            >
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/time"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="50dp"
+            android:id="@+id/tv_To_Time_RentActivity"
+            android:textColor="@color/white"
+            android:hint="To time"
+
+            android:gravity="left|center"
+            android:textColorHint="@color/white"
+            android:textSize="19sp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:text="submit"
+        android:textColor="#fff"
+        android:background="@color/buttonColor"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-thin"
+        android:textStyle="bold"
+        android:id="@+id/btnSubmit_ActivityRent"/>
+
+
+</LinearLayout>

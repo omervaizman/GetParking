@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:orientation="vertical"
+    android:background="#283990"
+    >
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="25sp"
+    android:text="Create an account"
+    android:fontFamily="monospace"
+    android:textStyle="bold"
+    android:layout_gravity="center"
+    android:layout_marginTop="35dp"
+    android:textColor="#fff"
+        android:layout_marginBottom="10dp"
+    />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/etColor"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/pencil"
+
+                />
+        </RelativeLayout>
+
+        <EditText
+            android:layout_width="220dp"
+            android:layout_height="45dp"
+            android:hint="First name"
+            android:background="@color/etColor"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:inputType="textPersonName"
+            android:id="@+id/et_Register_firstname"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/etColor"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/pencil"
+
+                />
+        </RelativeLayout>
+
+        <EditText
+            android:layout_width="220dp"
+            android:layout_height="45dp"
+            android:hint="Last name"
+            android:background="@color/etColor"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:inputType="textPersonName"
+            android:id="@+id/et_Register_lastname"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/etColor"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/mail"
+
+                />
+        </RelativeLayout>
+
+        <EditText
+            android:layout_width="220dp"
+            android:layout_height="45dp"
+            android:hint="Email"
+            android:background="@color/etColor"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:inputType="textEmailAddress"
+            android:id="@+id/et_Register_email"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/etColor"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/lock"
+
+                />
+        </RelativeLayout>
+
+        <EditText
+            android:layout_width="175dp"
+            android:layout_height="45dp"
+            android:hint="Password"
+            android:background="@color/etColor"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:id="@+id/et_Register_password"
+            android:password="true"/>
+
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/etColor">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/eye"
+                android:id="@+id/ivEye_register"
+                android:longClickable="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/etColor">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/lock" />
+        </RelativeLayout>
+
+        <EditText
+            android:layout_width="175dp"
+            android:layout_height="45dp"
+            android:hint="Confirm password"
+            android:background="@color/etColor"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:id="@+id/et_Register_password_confirm"
+            android:password="true"/>
+
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/etColor">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/eye"
+                android:id="@+id/ivEye_confirm_register"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="265dp"
+        android:layout_height="45dp"
+        android:text="Register"
+        android:textColor="#fff"
+        android:background="#F06767"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:textSize="17sp"
+        android:id="@+id/btnregister_regActivity"/>
+
+</LinearLayout>

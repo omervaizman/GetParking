@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation= "vertical"
+    android:background="#ABD1EE"
+    >
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
+        android:background="@drawable/logo"
+        android:layout_margin="50dp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="19sp"
+        android:textColor="#054481"
+        android:text="Don't have an account?"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:id="@+id/btntoRegister"
+        android:text="Register"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@drawable/r_l_bg"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have an account?"
+        android:textColor="#054481"
+        android:textSize="19sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        />
+    <Button
+        android:layout_width="220dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:id="@+id/btntoLogin"
+        android:text="Login"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@drawable/r_l_bg"
+        android:gravity="center"
+        />
+
+
+</LinearLayout>
