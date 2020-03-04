@@ -1,8 +1,6 @@
 package com.example.getparking;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -14,8 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
-
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -26,12 +22,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-
 import java.util.ArrayList;
 
-public class FindParkingActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class FindParkingActivity extends AppCompatActivity implements View.OnClickListener
+{
     ListView lv ;
     PostAdapter postAdapter;
     FirebaseFirestore db;
@@ -40,7 +34,6 @@ public class FindParkingActivity extends AppCompatActivity implements View.OnCli
     FirebaseUser user_fireuser;
     User user;
     Button done;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,16 +57,15 @@ public class FindParkingActivity extends AppCompatActivity implements View.OnCli
         loadPosts();
         Intent intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
-
-
-
     }
+
     public void loadPosts()
     {
         //Load all the post from the firebase Posts collection to an ArrayList.
         final ArrayList<ParkingPost> tempList = new ArrayList<ParkingPost>();
         db.collection("Posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task)
+            {
                 if (task.isSuccessful())
                 {
                     progressDialog.dismiss();
@@ -104,12 +96,12 @@ public class FindParkingActivity extends AppCompatActivity implements View.OnCli
        postAdapter = new PostAdapter(this, 0, 0, postList);
        //Toast.makeText(FindParkingActivity.this , postList.get(0).getName() , Toast.LENGTH_LONG).show();
        lv = (ListView) findViewById(R.id.lv_findParkingActivity);
-
        lv.setAdapter(postAdapter);
    }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.findparking_menu , menu);
         return true;
@@ -150,7 +142,8 @@ public class FindParkingActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         if (v == done)
         {
             //if the user done with parking searching , he will transfer to options activity.
