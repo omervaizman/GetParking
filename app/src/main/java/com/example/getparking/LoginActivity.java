@@ -88,6 +88,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    //login method from firebase authentication.
+
     public void login(String email ,String password)
     {
         //login function , using the fire-base authentications methods.
