@@ -96,4 +96,7 @@ public class OptionsActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 }
