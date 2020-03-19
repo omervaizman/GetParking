@@ -97,6 +97,5 @@ public class OptionsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void onBackPressed() {
-    }
+    public void onBackPressed() { }
 }

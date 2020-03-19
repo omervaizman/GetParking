@@ -57,53 +57,6 @@
     </LinearLayout>
 
 
-    <!--<LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/options_bg"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/ll_Camera_RentActivity">
-
-        <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            >
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/camera"
-                android:layout_centerInParent="true"
-                />
-        </RelativeLayout>
-        <TextView
-            android:layout_width="225dp"
-            android:layout_height="50dp"
-            android:id="@+id/tvCamera_RentActivity"
-            android:text="Your parking picture"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:textSize="19sp"
-
-            />
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerInParent="true"
-                android:id="@+id/iv_ParkingPic_RentActivity"/>
-
-        </RelativeLayout>
-
-    </LinearLayout> -->
-
 
     <LinearLayout
         android:layout_width="wrap_content"
