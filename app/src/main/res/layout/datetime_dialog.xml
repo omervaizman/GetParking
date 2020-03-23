@@ -34,17 +34,16 @@
             </RelativeLayout>
 
 
-            <EditText
+            <Button
+                android:id="@+id/btn_Date_DatetimeDialog"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@color/etColor"
                 android:hint=" Pick the date"
-                android:textSize="20sp"
-                android:textColorHint="#fff"
                 android:textColor="#fff"
-                android:id="@+id/et_Date_DatetimeDialog"
-                />
+                android:textColorHint="#fff"
+                android:textSize="20sp" />
 
         </LinearLayout>
         <LinearLayout
@@ -68,7 +67,7 @@
             </RelativeLayout>
 
 
-            <EditText
+            <Button
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -77,7 +76,7 @@
                 android:textSize="20sp"
                 android:textColorHint="#fff"
                 android:textColor="#fff"
-                android:id="@+id/et_Time_DatetimeDialog"
+                android:id="@+id/btn_Time_DatetimeDialog"
                 />
 
         </LinearLayout>

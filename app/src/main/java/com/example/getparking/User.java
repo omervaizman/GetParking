@@ -1,10 +1,9 @@
 package com.example.getparking;
 
-import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 
-@IgnoreExtraProperties
+
 @SuppressWarnings("serial")
 public class User implements Serializable {
     public String uid ;

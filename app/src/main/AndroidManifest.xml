@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PostManageActivity"></activity>
+        <activity android:name=".RestorePasswordActivity"></activity>
+        <activity android:name=".PostManageActivity" />
         <activity android:name=".AccountDetailsActivity" />
         <activity android:name=".FindParkingActivity" />
         <activity android:name=".RentParkingActivity" />

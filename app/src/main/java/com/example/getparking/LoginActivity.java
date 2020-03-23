@@ -2,68 +2,56 @@ package com.example.getparking;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.HideReturnsTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import com.example.getparking.Helpers.AppData;
+import com.example.getparking.Helpers.MyProgressDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etEmail , etPassword;
     int eye_Password_counter = 0;
     ImageView ivPasswd;
     Button btnLogin;
+    TextView forgotPass;
     private FirebaseAuth mAuth;
-    private String email ;
-    ProgressDialog progressDialog;
-    FirebaseFirestore db;
+    MyProgressDialog progressDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         //activity to handle user login.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        etEmail = (EditText) findViewById(R.id.et_login_email);
-        etPassword = (EditText) findViewById(R.id.et_login_password);
-        ivPasswd = (ImageView) findViewById(R.id.ivEye_login);
+        etEmail =  findViewById(R.id.et_login_email);
+        etPassword = findViewById(R.id.et_login_password);
+        ivPasswd =  findViewById(R.id.ivEye_login);
         ivPasswd.setOnClickListener(this);
-        btnLogin = (Button) findViewById(R.id.btnLogin_ActivityLogin);
+        btnLogin = findViewById(R.id.btnLogin_ActivityLogin);
         btnLogin.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        try {
-            Intent intent = getIntent();
-            email = intent.getExtras().getString("email");
-            etEmail.setText(email);
-
-        }
-        catch (Exception e)
-        {}
-        progressDialog = new ProgressDialog(this);
-
+        progressDialog = new MyProgressDialog(this);
+        forgotPass = findViewById(R.id.tv_ForgotPassword_LoginActivity);
+        forgotPass.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         if (v == btnLogin)
         {
             //if the user click login button it will execute login function.
@@ -86,33 +74,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 eye_Password_counter ++;
             }
         }
+        if (v == forgotPass)
+        {
+            startActivity(new Intent(LoginActivity.this , RestorePasswordActivity.class));
+        }
     }
-
-    //login method from firebase authentication.
 
     public void login(String email ,String password)
     {
-        //login function , using the fire-base authentications methods.
         progressDialog.setMessage("Try to login, Please wait...");
         progressDialog.show();
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
                         if (task.isSuccessful())
                         {
                             FirebaseUser mUser = mAuth.getCurrentUser();
-                            db.collection("Users").document(mUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            assert mUser != null;
+                            AppData.UserCollection.document(mUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
+                            {
                                 @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task)
+                                {
                                     if (task.isSuccessful())
                                     {
-                                        Intent intent = new Intent(LoginActivity.this , OptionsActivity.class);
-                                        User user = task.getResult().toObject(User.class);
-                                        intent.putExtra("user" , user);
-                                        startActivity(intent);
-                                        Toast.makeText(LoginActivity.this, "Login successfully!" , Toast.LENGTH_LONG).show();
+                                        if (task.getResult() != null)
+                                        {
+                                            AppData.connectedUser = task.getResult().toObject(User.class);
+                                            Intent intent = new Intent(LoginActivity.this , OptionsActivity.class);
+                                            startActivity(intent);
+                                            Toast.makeText(LoginActivity.this, "Login successfully!" , Toast.LENGTH_LONG).show();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(LoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(LoginActivity.this, "Internet error.",Toast.LENGTH_SHORT).show();
                                     }
 
                                 }
@@ -121,11 +124,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                         else
                         {
-
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
                         }
-                        progressDialog.dismiss();
+                        progressDialog.hide();
 
                     }
                 });
@@ -134,7 +135,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
     }
 }

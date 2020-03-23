@@ -10,9 +10,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,25 +21,20 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.HideReturnsTransformationMethod;
+
+import com.example.getparking.Helpers.AppData;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.api.Distribution;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.Objects;
 
 public class AccountDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth mAuth;
     FirebaseUser user_firebase;
     Dialog dialog_password , dialog_email , dialog_name;
-    FirebaseFirestore db;
-    User user;
-
     Button confirm , submit_passwordChange , submit_emailChange , submit_nameChange;
     EditText etFirstName , etLastName , etEmail , etCurrentPass , etNewPass , etConfirmNew , etConfirmPassword_ChangeEmail;
     LinearLayout changePassword , changeEmail , changeName;
@@ -54,22 +47,33 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
         //Activity for give the user the option to edit his details.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_details);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_accountDetails);
+
+        Toolbar toolbar = findViewById(R.id.toolbar_accountDetails);
         toolbar.setTitle("account details");
         setSupportActionBar(toolbar);
+
         mAuth = FirebaseAuth.getInstance();
         user_firebase= mAuth.getCurrentUser();
-        confirm = (Button) findViewById(R.id.btnConfirm_AccountDetails);
+        if (user_firebase == null)
+        {
+            AppData.connectedUser = null;
+            startActivity(new Intent(AccountDetailsActivity.this, MainActivity.class));
+        }
+        if (AppData.connectedUser == null)
+        {
+            mAuth.signOut();
+            startActivity(new Intent(AccountDetailsActivity.this, MainActivity.class));
+        }
+
+        confirm = findViewById(R.id.btnConfirm_AccountDetails);
+        changePassword = findViewById(R.id.llChangePassword_AccountDetails);
+        changeEmail = findViewById(R.id.llChangeEmail_AccountDetails);
+        changeName = findViewById(R.id.llChangeName_AccountDetails);
+
         confirm.setOnClickListener(this);
-        changePassword = (LinearLayout) findViewById(R.id.llChangePassword_AccountDetails);
-        changeEmail = (LinearLayout) findViewById(R.id.llChangeEmail_AccountDetails);
-        changeName = (LinearLayout) findViewById(R.id.llChangeName_AccountDetails);
         changeEmail.setOnClickListener(this);
         changePassword.setOnClickListener(this);
         changeName.setOnClickListener(this);
-        db = FirebaseFirestore.getInstance();
-        Intent intent = getIntent();
-        user = (User) intent.getSerializableExtra("user");
 
     }
 
@@ -81,7 +85,6 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
         {
             //if the user done with the details editing , back to the options select activity.
             Intent intent = new Intent(AccountDetailsActivity.this , OptionsActivity.class);
-            intent.putExtra("user" , user);
             startActivity(intent);
         }
         if (v == changePassword)
@@ -222,7 +225,7 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
 
             return false;
         }
-        else if ((!checkP.equals("")) && (newP.equals("") || currentP.equals("")))
+        else if (!checkP.equals("") && newP.equals(""))
         {
 
             return false;
@@ -246,7 +249,7 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
             else
             {
                 AuthCredential credential = EmailAuthProvider
-                        .getCredential(user.email , etCurrentPass.getText().toString());
+                        .getCredential(AppData.connectedUser.email , etCurrentPass.getText().toString());
                 user_firebase.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -286,14 +289,15 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
         dialog_password = new Dialog(this);
         dialog_password.setContentView(R.layout.change_password_dialog);
         dialog_password.setCancelable(true);
-        etCurrentPass = (EditText) dialog_password.findViewById(R.id.etCurrentPassword_ChangePassDialog);
-        etNewPass = (EditText) dialog_password.findViewById(R.id.etNewPassword_ChangePassDialog);
-        etConfirmNew = (EditText) dialog_password.findViewById(R.id.etConfirmPassword_ChangePassDialog);
-        submit_passwordChange = (Button) dialog_password.findViewById(R.id.btnSubmit_ChangePasswordDialog);
+        etCurrentPass =  dialog_password.findViewById(R.id.etCurrentPassword_ChangePassDialog);
+        etNewPass = dialog_password.findViewById(R.id.etNewPassword_ChangePassDialog);
+        etConfirmNew =  dialog_password.findViewById(R.id.etConfirmPassword_ChangePassDialog);
+        submit_passwordChange =  dialog_password.findViewById(R.id.btnSubmit_ChangePasswordDialog);
         submit_passwordChange.setOnClickListener(this);
-        eyeCurrentPass = (ImageView) dialog_password.findViewById(R.id.ivEyeCurrentPass_changePassDialog);
-        eyeNewPass = (ImageView) dialog_password.findViewById(R.id.ivEyeNewPass_changePassDialog);
-        eyePassConfirm = (ImageView) dialog_password.findViewById(R.id.ivEyeConfirmPass_changePassDialog);
+        eyeCurrentPass = dialog_password.findViewById(R.id.ivEyeCurrentPass_changePassDialog);
+        eyeNewPass = dialog_password.findViewById(R.id.ivEyeNewPass_changePassDialog);
+        eyePassConfirm = dialog_password.findViewById(R.id.ivEyeConfirmPass_changePassDialog);
+
         eyePassConfirm.setOnClickListener(this);
         eyeNewPass.setOnClickListener(this);
         eyeCurrentPass.setOnClickListener(this);
@@ -306,11 +310,11 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
         dialog_email = new Dialog(this);
         dialog_email.setContentView(R.layout.change_email_dialog);
         dialog_email.setCancelable(true);
-        etEmail = (EditText) dialog_email.findViewById(R.id.etNewEmail_ChangeEmailDialog);
-        etConfirmPassword_ChangeEmail = (EditText) dialog_email.findViewById(R.id.etPassConfirm_ChangeEmailDialog);
-        submit_emailChange = (Button) dialog_email.findViewById(R.id.btnSubmit_ChangeEmailDialog);
+        etEmail = dialog_email.findViewById(R.id.etNewEmail_ChangeEmailDialog);
+        etConfirmPassword_ChangeEmail =  dialog_email.findViewById(R.id.etPassConfirm_ChangeEmailDialog);
+        submit_emailChange = dialog_email.findViewById(R.id.btnSubmit_ChangeEmailDialog);
         submit_emailChange.setOnClickListener(this);
-        eyePassEmail = (ImageView) dialog_email.findViewById(R.id.ivEye_changeEmailDialog);
+        eyePassEmail =  dialog_email.findViewById(R.id.ivEye_changeEmailDialog);
         eyePassEmail.setOnClickListener(this);
         dialog_email.show();
 
@@ -321,11 +325,11 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
         dialog_name = new Dialog(this);
         dialog_name.setContentView(R.layout.change_name_dialog);
         dialog_name.setCancelable(true);
-        etFirstName = (EditText) dialog_name.findViewById(R.id.etFirstName_ChangeNameDialog);
-        etLastName = (EditText) dialog_name.findViewById(R.id.etLastName_ChangeNameDialog);
-        etFirstName.setText(user.firstName);
-        etLastName.setText(user.lastName);
-        submit_nameChange = (Button) dialog_name.findViewById(R.id.btnConfirm_ChangeNameDialog);
+        etFirstName = dialog_name.findViewById(R.id.etFirstName_ChangeNameDialog);
+        etLastName =  dialog_name.findViewById(R.id.etLastName_ChangeNameDialog);
+        etFirstName.setText(AppData.connectedUser.firstName);
+        etLastName.setText(AppData.connectedUser.lastName);
+        submit_nameChange = dialog_name.findViewById(R.id.btnConfirm_ChangeNameDialog);
         submit_nameChange.setOnClickListener(this);
         dialog_name.show();
     }
@@ -333,7 +337,7 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
     {
         //change the email in the fire store cloud and in the authentication database.
         final String passwordAuth = etConfirmPassword_ChangeEmail.getText().toString();
-        if (isEmailChanged(user))
+        if (isEmailChanged(AppData.connectedUser))
         {
             final ProgressDialog pd = new ProgressDialog(this);
             pd.setMessage("change your email...");
@@ -347,7 +351,7 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
                 @Override
                 public void onClick(final DialogInterface dialog, int which) {
                     AuthCredential credential = EmailAuthProvider
-                            .getCredential(user.email , passwordAuth);
+                            .getCredential(AppData.connectedUser.email , passwordAuth);
                     user_firebase.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -358,8 +362,8 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful())
                                         {
-                                            user.email = etEmail.getText().toString();
-                                            db.collection("Users").document(user.uid).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            AppData.connectedUser.email = etEmail.getText().toString();
+                                            AppData.UserCollection.document(AppData.connectedUser.uid).set(AppData.connectedUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful())
@@ -380,7 +384,7 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
                                         {
 
                                             pd.dismiss();
-                                            Toast.makeText(AccountDetailsActivity.this , task.getException().toString() , Toast.LENGTH_LONG).show();
+                                            Toast.makeText(AccountDetailsActivity.this , Objects.requireNonNull(task.getException()).toString() , Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });
@@ -418,8 +422,8 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
         String firstName = etFirstName.getText().toString();
         String lastName = etLastName.getText().toString();
 
-        user.firstName = firstName;
-        user.lastName = lastName;
+        AppData.connectedUser.firstName = firstName;
+        AppData.connectedUser.lastName = lastName;
         //create yes/no dialog to make sure the user want to execute the name change.
         final AlertDialog.Builder builder = new AlertDialog.Builder(AccountDetailsActivity.this);
         builder.setTitle("Full Name Change");
@@ -429,7 +433,7 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
             public void onClick(DialogInterface dialog, int which)
             {
 
-                db.collection("Users").document(user.uid).set(user)
+                AppData.UserCollection.document(AppData.connectedUser.uid).set(AppData.connectedUser)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -473,20 +477,21 @@ public class AccountDetailsActivity extends AppCompatActivity implements View.On
         super.onOptionsItemSelected(item);
         int id = item.getItemId();
 
-        if (id == R.id.action_logout) {
-            if (user_firebase != null) {
+        if (id == R.id.action_logout)
+        {
+            if (user_firebase != null)
+            {
                 mAuth.signOut();
+                AppData.connectedUser = null;
                 startActivity(new Intent(AccountDetailsActivity.this, MainActivity.class));
             }
         }
         if (id == R.id.action_account_details) {
             Intent intent = new Intent(AccountDetailsActivity.this, AccountDetailsActivity.class);
-            intent.putExtra("user" , user);
             startActivity(intent);
         }
         if (id == R.id.action_posts) {
             Intent intent = new Intent(AccountDetailsActivity.this, PostManageActivity.class);
-            intent.putExtra("user" , user);
             startActivity(intent);
         }
         return true;
